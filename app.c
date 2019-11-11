@@ -33,6 +33,7 @@ char problema = 0;
 int quant_indice[TAMANHO];
 char vertice_nome[TAMANHO] = {'A','B','C','D','E','F','G','H','I','J'};
 const int frequencia[12] = { 1,6,11,4,9,12,2,7,10,3,8,5 };
+const char *arquivo = "grafo.";
 
 GRAF newGrafo(){
 
@@ -49,7 +50,20 @@ GRAF newGrafo(){
 	return novo;
 }
 
-void desenho(GRAF grafo){
+void desenhar(){
+
+	FILE *file;
+
+	// Configurações
+	char *cabec = "digrapg g{";	// Cabeçalho
+	char *diret = "rankdir='LR'";	// Direção
+	char *label = "label='Grafos - Ciencia da computacao 2019'";	// Autor
+	char *node  = "node [shape='point']";	// circle
+
+	//file = fopen();
+}
+
+void calcGrafo(GRAF grafo){
 
 	char sair = 1;
 	int maior = 0;
@@ -116,7 +130,7 @@ void desenho(GRAF grafo){
 		printf(" O grafico foi todo listado\n");
 		exit(EXIT_SUCCESS);
 	}else{
-		desenho(grafo);
+		calcGrafo(grafo);
 	}
 }
 
@@ -134,7 +148,7 @@ int main(){
 	memcpy(grafo->adjacente, &matrizAdj, sizeof(grafo->adjacente));
 	memcpy(grafo->vertice_id, &vertice_nome, sizeof(grafo->vertice_id));
 
-	desenho(grafo);
+	calcGrafo(grafo);
 
 	return 0;
 }
