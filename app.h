@@ -8,7 +8,7 @@ extern "C"{
     typedef struct graf *GRAF;
 
     GRAF newGrafo();
-    void desenhar();
+    void desenhar(GRAF grafo);
     void calcGrafo(GRAF grafo);
 
 #ifdef __cplusplus

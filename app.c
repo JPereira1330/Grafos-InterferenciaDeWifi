@@ -31,9 +31,10 @@ char matrizAdj[TAMANHO][TAMANHO] = {
 int count = -1;
 char problema = 0;
 int quant_indice[TAMANHO];
+
 char vertice_nome[TAMANHO] = {'A','B','C','D','E','F','G','H','I','J'};
 const int frequencia[12] = { 1,6,11,4,9,12,2,7,10,3,8,5 };
-const char *arquivo = "grafo.";
+const char *arquivo = "grafo.gv";
 
 GRAF newGrafo(){
 
@@ -50,17 +51,46 @@ GRAF newGrafo(){
 	return novo;
 }
 
-void desenhar(){
+void desenhar(GRAF grafo){
 
 	FILE *file;
+	char buffer[4096];
+	char label [1024];
 
 	// Configurações
-	char *cabec = "digrapg g{";	// Cabeçalho
-	char *diret = "rankdir='LR'";	// Direção
-	char *label = "label='Grafos - Ciencia da computacao 2019'";	// Autor
-	char *node  = "node [shape='point']";	// circle
+	char *cabec = "digrapg g{\n rankdir='LR'\n label='Grafos - Ciencia da computacao 2019'\n node [shape='circle']\n\n";
 
-	//file = fopen();
+	file = fopen(arquivo, "a");
+	if(file == NULL){
+		printf("Ocorreu um erro ao abrir o arquivo");
+		return;
+	}
+
+	// Printando cabeçalho
+	snprintf(buffer, strlen(cabec), "%s", cabec);
+	fprintf(file, "%s",buffer);
+
+	// Printando label
+	for(int x = 0; x < TAMANHO; x++){
+		snprintf(label, sizeof(label), " %c [label='%c - %d']\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+		fprintf(file, "%s",label);
+	}
+
+	fprintf(file, "\n");
+
+	// Printando grafo
+	for(int i = 0; i < TAMANHO; i++){
+		for(int j = 0; j < TAMANHO; j++){
+			if(grafo->adjacente[i][j]){
+				snprintf(label, sizeof(label), " %c -> %c [color='#cccccc']\n",grafo->vertice_id[i], grafo->vertice_id[j], grafo->frequencia[j]);
+				fprintf(file, "%s",label);
+			}
+		}
+	}
+
+	fprintf(file, "}");
+
+	fclose(file);
 }
 
 void calcGrafo(GRAF grafo){
@@ -94,7 +124,7 @@ void calcGrafo(GRAF grafo){
 	}
 
 	grafo->frequencia[maior] = frequencia[count];
-	printf(" Ponto de acesso %c no canal %d \n",grafo->vertice_id[maior], grafo->frequencia[maior]);
+	printf("Ponto de acesso %c no canal %d \n",grafo->vertice_id[maior], grafo->frequencia[maior]);
 
 	for(int i = 0; i < TAMANHO; i++){
 		if(!grafo->adjacente[maior][i] && maior != i && !grafo->definido[i] ){
@@ -106,7 +136,7 @@ void calcGrafo(GRAF grafo){
 
 				if(j == TAMANHO - 1 && !problema){
 					grafo->frequencia[i] = frequencia[count];
-					printf(" Ponto de acesso %c no canal %d \n", grafo->vertice_id[i], grafo->frequencia[i]);
+					printf("Ponto de acesso %c no canal %d \n",grafo->vertice_id[i], grafo->frequencia[i]);
 					grafo->definido[i] = 1;
 					problema = 0;
 				}else if(j == TAMANHO - 1){
@@ -128,7 +158,7 @@ void calcGrafo(GRAF grafo){
 
 	if(sair){
 		printf(" O grafico foi todo listado\n");
-		exit(EXIT_SUCCESS);
+		return;
 	}else{
 		calcGrafo(grafo);
 	}
@@ -149,6 +179,7 @@ int main(){
 	memcpy(grafo->vertice_id, &vertice_nome, sizeof(grafo->vertice_id));
 
 	calcGrafo(grafo);
+	desenhar(grafo);
 
 	return 0;
 }
