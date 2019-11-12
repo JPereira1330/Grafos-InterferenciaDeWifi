@@ -58,7 +58,7 @@ void desenhar(GRAF grafo){
 	char label [1024];
 
 	// Configurações
-	char *cabec = "digraph g{\n rankdir=\"LR\"\n label=\"Grafos - Ciencia da computacao 2019\"\n node [shape=\"circle\"]\n\n";
+	char *cabec = "graph g{\n rankdir=\"LR\"\n label=\"Grafos - Ciencia da computacao 2019\"\n node [shape=\"circle\"]\n\n";
 
 	file = fopen(arquivo, "a");
 	if(file == NULL){
@@ -119,7 +119,7 @@ void desenhar(GRAF grafo){
 	for(int i = 0; i < TAMANHO; i++){
 		for(int j = 0; j < TAMANHO; j++){
 			if(grafo->adjacente[i][j]){
-				snprintf(label, sizeof(label), " %c -> %c\n",grafo->vertice_id[i], grafo->vertice_id[j], grafo->frequencia[j]);
+				snprintf(label, sizeof(label), " %c -- %c\n",grafo->vertice_id[i], grafo->vertice_id[j], grafo->frequencia[j]);
 				fprintf(file, "%s",label);
 			}
 		}
