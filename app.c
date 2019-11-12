@@ -165,7 +165,7 @@ void calcGrafo(GRAF grafo){
 
 	for(int i = 0; i < TAMANHO; i++){
 		if(!grafo->adjacente[maior][i] && maior != i && !grafo->definido[i] ){
-			for(int j = i; j < TAMANHO; j++){	
+			for(int j = 0; j < TAMANHO; j++){	
 
 				if(grafo->adjacente[i][j] && grafo->frequencia[j] == grafo->frequencia[maior]){
 					problema = 1;
