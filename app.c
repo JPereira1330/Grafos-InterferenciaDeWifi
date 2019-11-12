@@ -72,7 +72,44 @@ void desenhar(GRAF grafo){
 
 	// Printando label
 	for(int x = 0; x < TAMANHO; x++){
-		snprintf(label, sizeof(label), " %c [label=\"%c - %d\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+		switch(grafo->frequencia[x]){
+			case 1:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#FFFF00\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;
+			case 2:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#99CC32\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;
+			case 3:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#70DB93\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;			
+			case 4:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#32CD99\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;			
+			case 5:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#0000FF\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;			
+			case 6:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#007FFF\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;			
+			case 7:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#6B238E\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;			
+			case 8:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#C0D9D9\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;			
+			case 9:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#3299CC\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;
+			case 10:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#5F9F9F\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;
+			case 11:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#42426F\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;
+			case 12:	
+				snprintf(label, sizeof(label), " %c [label=\"%c - %d\", style=filled, fillcolor=\"#00009C\"]\n",grafo->vertice_id[x], grafo->vertice_id[x], grafo->frequencia[x]);
+				break;
+		}
 		fprintf(file, "%s",label);
 	}
 
@@ -82,7 +119,7 @@ void desenhar(GRAF grafo){
 	for(int i = 0; i < TAMANHO; i++){
 		for(int j = 0; j < TAMANHO; j++){
 			if(grafo->adjacente[i][j]){
-				snprintf(label, sizeof(label), " %c -> %c [color=\"#cccccc\"]\n",grafo->vertice_id[i], grafo->vertice_id[j], grafo->frequencia[j]);
+				snprintf(label, sizeof(label), " %c -> %c\n",grafo->vertice_id[i], grafo->vertice_id[j], grafo->frequencia[j]);
 				fprintf(file, "%s",label);
 			}
 		}
