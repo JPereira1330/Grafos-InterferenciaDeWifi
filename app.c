@@ -117,7 +117,7 @@ void desenhar(GRAF grafo){
 
 	// Printando grafo
 	for(int i = 0; i < TAMANHO; i++){
-		for(int j = 0; j < TAMANHO; j++){
+		for(int j = i; j < TAMANHO; j++){
 			if(grafo->adjacente[i][j]){
 				snprintf(label, sizeof(label), " %c -- %c\n",grafo->vertice_id[i], grafo->vertice_id[j], grafo->frequencia[j]);
 				fprintf(file, "%s",label);
@@ -165,7 +165,7 @@ void calcGrafo(GRAF grafo){
 
 	for(int i = 0; i < TAMANHO; i++){
 		if(!grafo->adjacente[maior][i] && maior != i && !grafo->definido[i] ){
-			for(int j = 0; j < TAMANHO; j++){	
+			for(int j = i; j < TAMANHO; j++){	
 
 				if(grafo->adjacente[i][j] && grafo->frequencia[j] == grafo->frequencia[maior]){
 					problema = 1;
