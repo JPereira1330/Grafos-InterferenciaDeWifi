@@ -11,5 +11,7 @@
     void init(GRAF grafo);
     void calc(GRAF grafo);
     void printGrafo(GRAF grafo);
+    void desenhar(GRAF grafo);
+    void printMatriz(GRAF grafo);
 
 #endif //GRAFOS_GRAFO_H

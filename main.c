@@ -2,8 +2,6 @@
 
 #include "grafo.h"
 
-#include <g>
-
 int main() {
 
     GRAF grafo = newGrafo();
@@ -11,7 +9,8 @@ int main() {
     init(grafo);
     calc(grafo);
     printGrafo(grafo);
-    //generateGrafo(grafo);
-
+    desenhar(grafo);
+    printMatriz(grafo);
+    
     return 0;
 }
